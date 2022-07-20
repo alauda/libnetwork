@@ -398,6 +398,7 @@ func (c *controller) processEndpointCreate(nmap map[string]*netWatch, ep *endpoi
 	go c.networkWatchLoop(nw, ep, ch)
 }
 
+// Fix deadlock
 func (c *controller) processEndpointDelete(nmap map[string]*netWatch, ep *endpoint) {
 	n := ep.getNetwork()
 	if !c.isDistributedControl() && n.Scope() == datastore.SwarmScope && n.driverIsMultihost() {
@@ -406,6 +407,7 @@ func (c *controller) processEndpointDelete(nmap map[string]*netWatch, ep *endpoi
 
 	networkID := n.ID()
 	endpointID := ep.ID()
+
 	c.Lock()
 	nw, ok := nmap[networkID]
 
