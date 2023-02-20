@@ -339,8 +339,6 @@ func (c *controller) processEndpointCreate(nmap map[string]*netWatch, ep *endpoi
 	if !c.isDistributedControl() && n.Scope() == datastore.SwarmScope && n.driverIsMultihost() {
 		return
 	}
-	networkID := n.ID()
-	endpointID := ep.ID()
 
 	networkID := n.ID()
 	endpointID := ep.ID()
